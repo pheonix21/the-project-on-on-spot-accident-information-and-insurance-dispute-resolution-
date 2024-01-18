@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Page</title>
+  <style>
+   body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  color: #007bff;
+}
+
+form {
+  text-align: center;
+  margin-top: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-right: 5px;
+  color: #333;
+}
+
+input[type="text"] {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#policyData {
+  background-color: #fff;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+p {
+  margin: 10px 0;
+  color: #333;
+}
+
+.verified {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.not-verified {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+  </style>
+</head>
+<body>
+  <!-- ... (existing HTML structure remains unchanged) ... -->
+  <script>
+    const dummyData = [
+      {
+        policyNumber: "POL001",
+        phoneNumber: "1234567890",
+        username: "John Doe",
+        drivingLicenseNumber: "DL123456",
+        ageOfVehicle: "5 years",
+        chassisNumber: "ABC123",
+        imageUrls: [
+          "https://drive.google.com/uc?id=1be_P-hZ7Yhz7yozvabPNRsJJQhx72OtR",
+          "https://drive.google.com/uc?id=anotherImageId"
+        ],
+        videoUrl: "https://www.example.com/sample-video.mp4", // Add video URL
+        verified: false
+      },
+      {
+        policyNumber: "POL002",
+        phoneNumber: "9876543210",
+        username: "Jane Smith",
+        drivingLicenseNumber: "DL654321",
+        ageOfVehicle: "3 years",
+        chassisNumber: "XYZ789",
+        imageUrls: [
+          "https://drive.google.com/uc?id=1bmmcdclGyPWYaJ353msa4dwGrEkxwdek"
+        ],
+        videoUrl: "https://www.example.com/another-video.mp4", // Add video URL
+        verified: true
+      }
+      // Add more dummy data entries as needed
+    ];
+
+    // Other functions remain unchanged
+    // ...
+
+    function displayPolicyData() {
+      const dataFromLocalStorage = JSON.parse(localStorage.getItem("policyData"));
+      const policyDataDiv = document.getElementById("policyData");
+
+      // Generating image elements for each image URL
+      const imageElements = dataFromLocalStorage.imageUrls.map(imageUrl => `<img src="${imageUrl}" alt="Policy Image" class="policy-image">`).join('');
+
+      // Adding video element if a video URL is present
+      const videoElement = dataFromLocalStorage.videoUrl ? `<video controls width="100%" height="auto" class="policy-video">
+                                                               <source src="${dataFromLocalStorage.videoUrl}" type="video/mp4">
+                                                             Your browser does not support the video tag.
+                                                           </video>` : '';
+
+      policyDataDiv.innerHTML = `
+        <h2>Policy Number: ${dataFromLocalStorage.policyNumber}</h2>
+        <p>Phone Number: ${dataFromLocalStorage.phoneNumber}</p>
+        <p>Username: ${dataFromLocalStorage.username}</p>
+        <p>Driving License Number: ${dataFromLocalStorage.drivingLicenseNumber}</p>
+        <p>Age of Vehicle: ${dataFromLocalStorage.ageOfVehicle}</p>
+        <p>Chassis Number: ${dataFromLocalStorage.chassisNumber}</p>
+        ${imageElements}
+        ${videoElement}
+        <p>Status: <span class="${dataFromLocalStorage.verified ? 'verified' : 'not-verified'}">
+        ${dataFromLocalStorage.verified ? 'Verified' : 'Not Verified'}</span></p>
+      `;
+    }
+  </script>
+</body>
+</html>

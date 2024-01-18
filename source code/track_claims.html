@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Insurance Admin Login</title>
+  <link rel="stylesheet"  href="track.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    .wrapper {
+      text-align: center;
+    }
+
+   
+
+    h1 {
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+
+    .input-box {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: calc(100% - 32px);
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    i.bx {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      font-size: 22px;
+      color: #888;
+    }
+
+    button[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    #user-details {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    .verified {
+      color: green;
+    }
+
+    .not-verified {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <form id="login-form">
+      <h1>TRACK YOUR CLAIM</h1>
+      <div class="input-box">
+        <input type="text" id="phone-number" placeholder="Phone Number" required>
+        <i class='bx bxs-phone'></i>
+      </div>
+      <div class="input-box">
+        <input type="text" id="policy-number" placeholder="Policy Number" required>
+        <i class='bx bxs-user'></i>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+
+    <div id="user-details"></div>
+  </div>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Simulate login and store verification status in localStorage
+      const loginDetails = {
+        phoneNumber: document.getElementById('phone-number').value,
+        policyNumber: document.getElementById('policy-number').value,
+        verified: Math.random() < 0.5 // Randomly assigning verification status (for demonstration)
+      };
+
+      localStorage.setItem('loginDetails', JSON.stringify(loginDetails));
+
+      // Show verification status on the page
+      const userDetails = document.getElementById('user-details');
+      userDetails.textContent = `Verification Status: ${loginDetails.verified ? 'Verified' : 'Not Verified'}`;
+      userDetails.className = loginDetails.verified ? 'verified' : 'not-verified';
+    });
+  </script>
+</body>
+</html>

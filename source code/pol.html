@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Police Accident Reporting Portal</title>
+  <link rel="stylesheet" href="ppp.css">
+</head>
+<body>
+  <div class="container">
+    <h1>POLICE Verification PORTAL</h1>
+    <form id="accident-form">
+      <label for="policy-number">Policy Number:</label>
+      <input type="text" id="PolicyNumber" name="policy-number">
+
+      <label for="policy-number">Policy holder name :</label>
+      <input type="text" id="PolicyHolder" name="policy-number">
+
+      <label for="policy-number">Phone Number:</label>
+      <input type="text" id="PhoneNumber" name="policy-number">
+      
+      <label for="policy-number">Vehicle Number:</label>
+      <input type="text" id="VehicleNumber" name="policy-number">
+
+      <label for="policy-number">Date of Accident:</label>
+      <input type="text" id="Date" name="policy-number">
+
+      <label for="hospital-report">FIR copy (Image):</label>
+      <input type="file" id="fir-report" name="fir-report">
+
+      <label for="witness-image">Witness image (Image):</label>
+      <input type="file" id="witness-image" name="witness-image">
+
+      <label for="witness-video">Witness video:</label>
+      <input type="file" id="witness-video" name="witness-video">
+
+      <label>
+        <input type="checkbox" id="verify-checkbox" name="verify-checkbox">
+        I verify that all the above details are correct.
+      </label>
+      <button type="button" id="verify-button">Verify</button>
+    </form>
+  </div>
+  <script>
+    document.getElementById('verify-button').addEventListener('click', function(event) {
+      event.preventDefault();
+      // Assuming verification logic here - check form fields, send data to server, etc.
+      // For demonstration purposes, redirecting to a success message in a new window.
+      window.open('success.html', '_blank');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+body {
+  text-align: center;
+  font-family: sans-serif;
+  background-color: #f5f5f5; /* Light gray background for visual appeal */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+}
+
+.message {
+  font-size: 24px;
+  color: #333;
+  margin-top: 20px; /* Adjust spacing if needed */
+}

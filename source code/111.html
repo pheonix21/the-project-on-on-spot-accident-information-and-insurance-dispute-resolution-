@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      color: #333;
+    }
+    form {
+      text-align: center;
+      margin-top: 20px;
+    }
+    label {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    input[type="text"] {
+      padding: 8px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #policyData {
+      background-color: white;
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+    p {
+      margin: 5px 0;
+    }
+    .verified {
+      color: green;
+      font-weight: bold;
+    }
+    .not-verified {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Policy Data Search</h1>
+  <form>
+    <label for="policyNumber">Policy Number:</label>
+    <input type="text" id="PolicyNumber" name="PolicyNumber">
+    <button type="button" onclick="fetchPolicyData()">Fetch Data</button>
+    <button type="button" onclick="verifyData()">Verify</button>
+  </form>
+  
+  <div id="policyData">
+    <!-- Display fetched data here -->
+  </div>
+
+  <script>
+    const dummyData = [
+      {
+        policyNumber: "000015992",
+        phoneNumber: "9513800715",
+        username: "MR ASIM AKHTAR",
+        RegistrationNumber: "KA19MG7778",
+        ageOfVehicle: "7 years",
+        chassisNumber: "Y00035",
+        location: " kormangala",
+        dateofaccident: "12/01/2024",
+        description: " Night 12 pm at sri junction a speeding bike on a cross road hit my car",
+        imageUrls: [
+          "https://drive.google.com/uc?id=1be_P-hZ7Yhz7yozvabPNRsJJQhx72OtR",
+          "https://drive.google.com/uc?id=anotherImageId"
+        ],
+        verified: false
+      },
+      {
+        policyNumber: "POL002",
+        phoneNumber: "9876543210",
+        username: "Jane Smith",
+        drivingLicenseNumber: "DL654321",
+        ageOfVehicle: "3 years",
+        chassisNumber: "XYZ789",
+        imageUrls: [
+          "https://drive.google.com/uc?id=1bmmcdclGyPWYaJ353msa4dwGrEkxwdek"
+        ],
+        verified: true
+      }
+      // Add more dummy data entries as needed
+    ];
+
+    // Other functions remain unchanged
+    // ...
+
+    function displayPolicyData() {
+      const dataFromLocalStorage = JSON.parse(localStorage.getItem("policyData"));
+      const policyDataDiv = document.getElementById("policyData");
+
+      // Generating image elements for each image URL
+      const imageElements = dataFromLocalStorage.imageUrls.map(imageUrl => `<img src="${imageUrl}" alt="Policy Image" class="policy-image">`).join('');
+
+      policyDataDiv.innerHTML = `
+        <h2>Policy Number: ${dataFromLocalStorage.policyNumber}</h2>
+        <p>Phone Number: ${dataFromLocalStorage.phoneNumber}</p>
+        <p>Username: ${dataFromLocalStorage.username}</p>
+        <p>Driving License Number: ${dataFromLocalStorage.drivingLicenseNumber}</p>
+        <p>Age of Vehicle: ${dataFromLocalStorage.ageOfVehicle}</p>
+        <p>Chassis Number: ${dataFromLocalStorage.chassisNumber}</p>
+        <p>location: ${dataFromLocalStorage.location}</p>
+        <p>description: ${dataFromLocalStorage.description}</p>
+        <p>dateOfAccident: ${dataFromLocalStorage.dateOfAccident}</p>
+        <img src="${dataFromLocalStorage.imageUrl}" alt="Policy Image">
+        <img src="${dataFromLocalStorage.imageUrl}" alt="Policy Image">
+        <p>Status: <span class="${dataFromLocalStorage.verified ? 'verified' : 'not-verified'}">
+        ${dataFromLocalStorage.verified ? 'Verified' : 'Not Verified'}</span></p>
+      `;
+    }
+  </script>
+</body>
+</html>

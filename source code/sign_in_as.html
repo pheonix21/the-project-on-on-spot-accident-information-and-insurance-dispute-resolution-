@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign up Portals</title>
+    <link rel="stylesheet" href="sign_up.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* Additional styles for the pop-up message */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 999;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="background"></div>
+    <div class="container">
+        <div class="item">
+            
+            
+            <div class="text-item">
+                <h2>WELCOME! <br><span>
+                    As POLICE OR INSURANCE PROVIDER
+                </span></h2>
+            
+            </div>
+        </div>
+        <div class="login-section">
+            <div class="form-box login">
+                <form action="" id="signup police">
+                    <h2>Sign up as police</h2>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-home-circle'></i></span>
+                        <input type="text" required>
+                        <label >Name</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-envelope'></i></span>
+                        <input type="text" required>
+                        <label >Police Id</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-envelope'></i></span>
+                        <input type="text" required>
+                        <label >Station</label>
+                        </div>
+                        <div class="input-box">
+                            <span class="icon"><i class='bx bxs-envelope'></i></span>
+                            <input type="text" required>
+                            <label >Zone</label>
+                            </div>
+                            <div class="input-box">
+                                <span class="icon"><i class='bx bxs-envelope'></i></span>
+                                <input type="text" required>
+                                <label >Email</label>
+                                </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-lock-alt' ></i></span>
+                        <input type="password" required>
+                        <label>Password</label>
+                    </div>
+                    
+                    <a href="cops.html"></a><button class="btn" onclick="openPopup('You have successfully registered as police ')">sign up</button>
+                    
+                </form>
+            </div>
+            <div class="form-box register">
+                <form action="" id="signup provider">
+
+                    <h2>Sign up as insurance Provider</h2>
+
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-user'></i></span>
+                        <input type="text" required>
+                        <label >Firm Name</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bx-registered'></i></span>
+                        <input type="text" required>
+                        <label >Employee ID</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bx-registered'></i></span>
+                        <input type="text" required>
+                        <label >Employee name</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bx-registered'></i></span>
+                        <input type="text" required>
+                        <label >State/Area</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bx-registered'></i></span>
+                        <input type="text" required>
+                        <label >Email</label>
+                    </div>
+                  
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-lock-alt' ></i></span>
+                        <input type="password" required>
+                        <label>Password</label>
+                    </div>
+                   
+                    <button class="btn" onclick="openPopup('You have successfully Registered as Insurence Provider')">sign up</button>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <p id="popup-message"></p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        // Function to open the popup with a message
+        function openPopup(message) {
+            document.getElementById("popup-message").innerHTML = message;
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("popup").style.display = "block";
+        }
+
+        // Function to close the popup
+        function closePopup() {
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("popup").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
+

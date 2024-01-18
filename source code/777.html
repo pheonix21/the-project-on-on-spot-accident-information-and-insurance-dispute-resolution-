@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      color: #333;
+    }
+    form {
+      text-align: center;
+      margin-top: 20px;
+    }
+    label {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    input[type="text"] {
+      padding: 8px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #policyData {
+      background-color: white;
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+    p {
+      margin: 5px 0;
+    }
+    .verified {
+      color: green;
+      font-weight: bold;
+    }
+    .not-verified {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Policy Data Search</h1>
+  <form>
+    <label for="policyNumber">Policy Number:</label>
+    <input type="text" id="PolicyNumber" name="PolicyNumber">
+    <button type="button" onclick="fetchPolicyData()">Fetch Data</button>
+    <button type="button" onclick="verifyData()">Verify</button>
+  </form>
+  
+  <div id="policyData">
+    <!-- Display fetched data here -->
+  </div>
+
+  <script>
+    // Dummy data
+    const dummyData = [
+      {
+        policyNumber: "HDFC00213",
+        phoneNumber: "9010203040",
+        username: "MARIO",
+        drivingLicenseNumber: "KA01MG7778",
+        ageOfVehicle: "2 years",
+        chassisNumber: "CHAS2231",
+        location: "yelahanka",
+        dateOfAccident: new Date("january 08, 2024"),
+        description: "was cruising at 100 kmph , road covered with fog zero visibility and hit a car front of me ",
+        imageUrl: "https://drive.google.com/uc?id=1be_P-hZ7Yhz7yozvabPNRsJJQhx72OtR",
+       
+        verified: false
+      },
+      {
+  
+        PolicyNumber: "000015592",
+        PhoneNumber: "8904380715",
+        UserName: "MR ASIM AKTHAR",
+        RegistrationNumber: "KA19MG7778",
+        AgeOfVehicle: "7 years",
+        EngineNumber: "02940"
+        ChassisNumber: "Y0035",
+        Location: "MG ROAD",
+        DateOfAccident: new Date("January 11, 2024"),
+        Description: "was cruising at 100 kmph, road covered with fog zero visibility and hit a car in front of me",
+        imageUrl: "images.project/audi.jpg",
+        verified: false
+},
+
+      
+      // Add more dummy data entries as needed
+    ];
+
+    function fetchPolicyData() {
+      const PolicyNumber = document.getElementById("PolicyNumber").value;
+
+      // Find matching data based on the input policy number
+      const foundData = dummyData.find(data => data.PolicyNumber === PolicyNumber);
+
+      if (foundData) {
+        // Store found data in localStorage
+        localStorage.setItem("PolicyData", JSON.stringify(foundData));
+
+        // Display found data in appropriate elements
+        displayPolicyData();
+      } else {
+        // Handle case when no data is found
+        const policyDataDiv = document.getElementById("PolicyData");
+        policyDataDiv.innerHTML = "<p>No data found for the entered policy number.</p>";
+      }
+    }
+
+    function verifyData() {
+      const dataFromLocalStorage = JSON.parse(localStorage.getItem("policyData"));
+      if (dataFromLocalStorage) {
+        dataFromLocalStorage.verified = true;
+        localStorage.setItem("policyData", JSON.stringify(dataFromLocalStorage));
+
+        // Update UI to show "Verified"
+        displayPolicyData();
+      }
+    }
+
+    function displayPolicyData() {
+      const dataFromLocalStorage = JSON.parse(localStorage.getItem("policyData"));
+      const policyDataDiv = document.getElementById("policyData");
+      policyDataDiv.innerHTML = `
+        <h2>Policy Number: ${dataFromLocalStorage.PolicyNumber}</h2>
+        <p>Phone Number: ${dataFromLocalStorage.PhoneNumber}</p>
+        <p>Username: ${dataFromLocalStorage.UserName}</p>
+        <p>Registration Number: ${dataFromLocalStorage.RegistrationNumber}</p>
+        <p>Age of Vehicle: ${dataFromLocalStorage.AgeOfVehicle}</p>
+        <p>Chassis Number: ${dataFromLocalStorage.ChassisNumber}</p>
+        <p>location: ${dataFromLocalStorage.Location}</p>
+        <p>description: ${dataFromLocalStorage.Description}</p>
+        <p>dateOfAccident: ${dataFromLocalStorage.DateOfAccident}</p>
+        <img src="${dataFromLocalStorage.imageUrl}" alt="Policy Image">
+        <p>Status: <span class="${dataFromLocalStorage.verified ? 'verified' : 'not-verified'}">
+        ${dataFromLocalStorage.verified ? 'Verified' : 'Not Verified'}</span></p>
+        `;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      color: #ffffff;
+    }
+    form {
+      text-align: center;
+      margin-top: 20px;
+    }
+    label {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    input[type="text"] {
+      padding: 8px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #policyData {
+      background-color: white;
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+    p {
+      margin: 5px 0;
+    }
+    .verified {
+      color: green;
+      font-weight: bold;
+    }
+    .not-verified {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Policy Data Search</h1>
+  <form>
+    <label for="policyNumber">Policy Number:</label>
+    <input type="text" id="policyNumber" name="policyNumber">
+    <button type="button" onclick="fetchPolicyData()">Fetch Data</button>
+    <button type="button" onclick="verifyData()">Verify</button>
+  </form>
+  
+  <div id="policyData">
+    <!-- Display fetched data here -->
+  </div>
+
+  <script>
+    // Dummy data
+    const dummyData = [
+      {
+        policyNumber: "BAJAJ-000015592",
+        phoneNumber: "8904380715",
+        username: "ASIM AKTHAR ",
+        VehicleNumber: "KA19MG7778",
+        InsuranceExpire: "sept/2024",
+        ageOfVehicle: "7 years",
+        chassisNumber: "Y00035",
+        engineNumber: "02940",
+        idvValue: "18,13,088.00",
+        location: "MG ROAD",
+        dateofaccident: "12/01/2024",
+        description: " midnight around 12 pm in  speeding bike hit my car ",
+        imageUrl: "./images.project/audi.jpg",imageUrlFIR: "./images.project/fir.jpeg",
+        verified: false
+      },
+      {
+        policyNumber: "BAJAJ-000015592",
+        phoneNumber: "8553005672",
+        username: "ASIM AKTHAR ",
+        VehicleNumber: "KA19MG7778",
+        InsuranceExpire: "sept/2024",
+        ageOfVehicle: "7 years",
+        chassisNumber: "Y00035",
+        engineNumber: "02940",
+        idvValue: "18,13,088.00",
+        location: "MG ROAD",
+        dateofaccident: "12/01/2024",
+        description: " midnight around 12 pm in  speeding bike hit my car ",
+        imageUrl: "./images.project/audi.jpg",imageUrlFIR: "./images.project/fir.jpeg",
+        verified: false
+      }
+      // Add more dummy data entries as needed
+    ];
+
+    function fetchPolicyData() {
+      const policyNumber = document.getElementById("policyNumber").value;
+
+      // Find matching data based on the input policy number
+      const foundData = dummyData.find(data => data.policyNumber === policyNumber);
+
+      if (foundData) {
+        // Store found data in localStorage
+        localStorage.setItem("policyData", JSON.stringify(foundData));
+
+        // Display found data in appropriate elements
+        displayPolicyData();
+      } else {
+        // Handle case when no data is found
+        const policyDataDiv = document.getElementById("policyData");
+        policyDataDiv.innerHTML = "<p>No data found for the entered policy number.</p>";
+      }
+    }
+
+    function verifyData() {
+      const dataFromLocalStorage = JSON.parse(localStorage.getItem("policyData"));
+      if (dataFromLocalStorage) {
+        dataFromLocalStorage.verified = true;
+        localStorage.setItem("policyData", JSON.stringify(dataFromLocalStorage));
+
+        // Update UI to show "Verified"
+        displayPolicyData();
+      }
+    }
+
+    function displayPolicyData() {
+      const dataFromLocalStorage = JSON.parse(localStorage.getItem("policyData"));
+      const policyDataDiv = document.getElementById("policyData");
+      policyDataDiv.innerHTML = `
+        <h2>Policy Number: ${dataFromLocalStorage.policyNumber}</h2>
+        <p>Phone Number: ${dataFromLocalStorage.phoneNumber}</p>
+        <p>Username: ${dataFromLocalStorage.username}</p>
+        <p>Vehicle Number: ${dataFromLocalStorage.VehicleNumber}</p>
+        <p> Insurance Expire: ${dataFromLocalStorage.InsuranceExpire}</p>
+        <p>Age of Vehicle: ${dataFromLocalStorage.ageOfVehicle}</p>
+        <p>EngineNumber: ${dataFromLocalStorage.engineNumber}</p>
+        <p>Chassis Number: ${dataFromLocalStorage.chassisNumber}</p>
+        <p>IDV value: ${dataFromLocalStorage.idvValue}</p>
+        <p>Location: ${dataFromLocalStorage.location}</p>
+        <p>DateofAccident: ${dataFromLocalStorage.dateofaccident}</p>
+        <p>Description: ${dataFromLocalStorage.description}</p>
+        <img src="${dataFromLocalStorage.imageUrl}" alt="Policy Image">
+        <img src="${dataFromLocalStorage.imageUrlFIR}" alt="Documents">
+        <p>Status: <span class="${dataFromLocalStorage.verified ? 'verified' : 'not-verified'}">
+        ${dataFromLocalStorage.verified ? 'Verified' : 'Not Verified'}</span></p>
+      `;
+    }
+  </script>
+</body>
+</html>
